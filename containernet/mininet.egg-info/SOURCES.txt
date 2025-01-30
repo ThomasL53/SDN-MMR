@@ -1,3 +1,5 @@
+LICENSE
+README.md
 pyproject.toml
 mininet/__init__.py
 mininet/__main__.py

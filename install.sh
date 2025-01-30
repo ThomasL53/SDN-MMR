@@ -35,13 +35,13 @@ python3 -m venv venv >> "$LOG_FILE" 2>&1
 
 source venv/bin/activate >> "$LOG_FILE" 2>&1
 
+sudo apt-get install python3-tk -yqq >> "$LOG_FILE" 2>&1
+
 echo "Installation des librairies Python ..."
 
 pip install . --break-system-packages >> "$LOG_FILE" 2>&1
 
 pip install networkx --break-system-packages >> "$LOG_FILE" 2>&1
-
-pip install tkinter --break-system-packages >> "$LOG_FILE" 2>&1
 
 pip install scipy --break-system-packages >> "$LOG_FILE" 2>&1
 
