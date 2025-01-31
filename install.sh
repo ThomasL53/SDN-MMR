@@ -71,8 +71,6 @@ sudo apt-get update >> "$LOG_FILE" 2>&1
 
 sudo apt-get install grafana >> "$LOG_FILE" 2>&1
 
-sudo rm prometheus-3.1.0.linux-386.tar.gz >> "$LOG_FILE" 2>&1
-
 echo " Installation de Prometheus ..."
 
 wget https://github.com/prometheus/prometheus/releases/download/v3.1.0/prometheus-3.1.0.linux-386.tar.gz >> "$LOG_FILE" 2>&1
@@ -80,6 +78,8 @@ wget https://github.com/prometheus/prometheus/releases/download/v3.1.0/prometheu
 tar -xzf prometheus-*.tar.gz >> "$LOG_FILE" 2>&1
 
 cp prometheus.yml prometheus-3.1.0.linux-amd64/prometheus.yml >> "$LOG_FILE" 2>&1
+
+sudo rm prometheus-3.1.0.linux-386.tar.gz >> "$LOG_FILE" 2>&1
 
 echo " Installation de Node_Exporter ..."
 
