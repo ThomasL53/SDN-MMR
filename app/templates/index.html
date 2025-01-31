@@ -5,21 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lecteur vidéo adaptatif</title>
 <style>
-    video {
-        width: 100%;
-        max-width: 800px;
-    }
+ video {
+ width: 100%;
+ max-width: 800px;
+ }
 </style>
 </head>
 <body>
 <video data-dashjs-player autoplay controls>
-    <source src="http://192.168.1.1/video/video.mpd" type="application/dash+xml">
+ <source src="http://192.168.1.1/video/video.mpd" type="application/dash+xml">
 </video>
+<button id="toggleVideoButton">MPTCP OFF</button>
 <script src="/videojs/dash.all.min.js"></script>
 <script>
-    const video = document.querySelector("video");
-    const player = dashjs.MediaPlayer().create();
-    player.initialize(video, "http://192.168.1.1/video/video.mpd", true);
+ const video = document.querySelector("video");
+ const player = dashjs.MediaPlayer().create();
+ let isMPTCPOn = false;
+
+ const toggleVideo = () => {
+   if (isMPTCPOn) {
+     player.initialize(video, "http://192.168.1.1/video/video.mpd", true);
+     document.getElementById("toggleVideoButton").innerText = "MPTCP OFF";
+   } else {
+     player.initialize(video, "http://192.168.1.1/video/videoMPTCP.mpd", true);
+     document.getElementById("toggleVideoButton").innerText = "MPTCP ON";
+   }
+   isMPTCPOn = !isMPTCPOn;
+ };
+
+ document.getElementById("toggleVideoButton").addEventListener("click", toggleVideo);
 </script>
 </body>
 </html>
