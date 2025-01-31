@@ -1,7 +1,7 @@
 # Résilience d'un Système Vidéo Contenairisé utilisant MPTCP en Environnement SDN face aux Fluctuations de Bande Passante
 
-[![Ubuntu 24.04](https://releases.ubuntu.com/noble/)
-[![Containernet 3.1](https://github.com/containernet/containernet)
+[![Ubuntu 24.04](https://img.shields.io/badge/Ubuntu-24.04-orange.svg)](https://releases.ubuntu.com/noble/)
+[![Containernet 3.1](https://img.shields.io/badge/Containernet_3.1-blue.svg)](https://github.com/containernet/containernet)
 
 ## Introduction
   Cette plateforme développé avec **Containernet 3.1** pour **Ubuntu 24.04**. Permet d'étudier la résilience d'un système vidéo en **environnement SDN** face aux Fluctuations de bande passante. 
