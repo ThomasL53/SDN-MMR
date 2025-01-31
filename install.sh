@@ -58,3 +58,15 @@ sudo docker pull thomasl53/webserver >> "$LOG_FILE" 2>&1
 echo "Réupération de l'image docker pour le client Firefox  ..."
 
 sudo docker pull thomasl53/firefox >> "$LOG_FILE" 2>&1
+
+echo " Installation de Grafana ..."
+
+sudo apt-get install -y apt-transport-https software-properties-common wget >> "$LOG_FILE" 2>&1
+
+echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list >> "$LOG_FILE" 2>&1
+
+sudo apt-get update >> "$LOG_FILE" 2>&1
+
+sudo apt-get install grafana >> "$LOG_FILE" 2>&1
+
+
