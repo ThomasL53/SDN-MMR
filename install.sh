@@ -75,16 +75,10 @@ wget https://github.com/prometheus/prometheus/releases/download/v3.1.0/prometheu
 
 tar -xzf prometheus-*.tar.gz
 
-cd prometheus-*
-
-....
-
- ./prometheus --config.file=./prometheus.yml
+cp prometheus.yml prometheus-3.1.0.linux-amd64/prometheus.yml
 
 echo " Installation de Node_Exporter ..."
 
 wget https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-amd64.tar.gz
 
 tar -xzf node_*.tar.gz
-
-./node_exporter
