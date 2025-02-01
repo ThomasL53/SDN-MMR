@@ -80,10 +80,10 @@ class Net:
         dumpNodeConnections(self.dockernet.hosts)
 
         #Aide
-        print("Controlleur floodlight accèsible via http://127.0.0.1:8080/ui/pages/index.html")
-        print("Serceur vidéo accèsible via http://127.0.0.1:8888 (192.168.1.1:80 dans la simulation)")
-        print("Client vidéo accèsible via http://127.0.0.1:9999 (192.168.1.2:80 dans la simulation)")
-        print("Client vidéo firefox accèsible via http://127.0.0.1:3001")
+        print("Controlleur floodlight accessible via http://127.0.0.1:8080/ui/pages/index.html")
+        print("Serceur vidéo accessible via http://127.0.0.1:8888 (192.168.1.1:80 dans la simulation)")
+        print("Client vidéo accessible via http://127.0.0.1:9999 (192.168.1.2:80 dans la simulation)")
+        print("Client vidéo firefox accessible via http://127.0.0.1:3000")
         
         #Création d'une représentation de la simulation en SVG
         self.draw_graph()
