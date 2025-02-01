@@ -33,10 +33,13 @@ Arret de la simulation:
   ./SDN stop
   ```
     
-Ouverture de l'interface de perturbations d'un lien
+Ouverture de l'interface de perturbations d'un lien:
   ```shell
   ./SDN degrade
   ```
+Test du streaming adaptatif DASH:
+
+[![Allez à la section](https://img.shields.io/badge/Section_lecture_de_vidéo-blue.svg)](https://github.com/ThomasL53/SDN-MMR/tree/master?tab=readme-ov-file#lecture-des-fichiers-vid%C3%A9os)
     
 ## Choix et format la topologie SDN
 ### Topologoie 'topology-zoo'
