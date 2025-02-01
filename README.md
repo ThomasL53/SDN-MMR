@@ -137,5 +137,17 @@ def send_chunk(filename):
     return send_from_directory('video', filename) 
 ```
 ### Lecture des fichiers vidéos
+- Les fichiers vidéos peuvent être lu à travers la simulation en utilisant le client firefox (***dans la même plage d'adressage que le serveur***)
+- Pour se connecter au client firefox, ouvrer un navigateur et accéder à **http://127.0.0.1:3000**
+- Dans la fenêtre qui s'ouvre accèder à **http://192.168.1.1**
+- La page web utilise un lecteur vidéo dashjs (***code javascript du lecteur chargé en local depuis app/videojs***)
+### Analyse du traffic vidéo
+- Pour analyser le traffic vidéo, vous pouvez utiliser la console du client firefox (***clic droit->Inspecter ou F12***).
+- Désactiver 'Errors' et 'Warnings' puis activer 'XHR' et 'Requests':
 
-    
+>img
+
+### Analyse du traffic réseau
+- Pour analyser le traffic réseau sur un lien de la simulation, utiliser Wireshark
+- Sélectionner grâce à la vue ***'graph.svg'*** l'interface à surveiller
+
