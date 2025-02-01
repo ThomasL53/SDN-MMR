@@ -4,7 +4,7 @@
 [![Containernet 3.1](https://img.shields.io/badge/Containernet_3.1-blue.svg)](https://github.com/containernet/containernet)
 
 ## Introduction
-  Cette plateforme développée avec **Containernet 3.1** pour **Ubuntu 24.04**. Permet d'étudier la résilience d'un système vidéo en **environnement SDN** face aux fluctuations de bande passante.
+  Cette plateforme développée avec **Containernet 3.1** pour **Ubuntu 24.04** permet d'étudier la résilience d'un système vidéo en **environnement SDN** face aux fluctuations de bande passante.
   De plus, elle implémente un système permettant de faire du **MPTCP avec DASH** pour étudier **l'impact de MPTC sur la QoS et la QoE** dans le streaming DASH.
 
 ## Installation
