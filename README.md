@@ -49,7 +49,7 @@ Test du streaming adaptatif DASH:
 Les topologies exploitables sur cette plateforme sont celles disponibles sur **https://topology-zoo.org/**.  
 Pour mettre en oeuvre une topologie, il suffit de spécifier son nom dans le programme core/start.py et core/stop.py.  
 Par défaut, la topologie renseignée est **'Aarnet'**. Par exemple, si vous voulez simuler la topologie **'Renater2010'** remplacer **'Aaranet'** dans core/start.py et core/stop.py par **'Renater2010'**
-Vous pouvez toutes les topologies disponibles sur **https://topology-zoo.org/explore.html**
+Vous pouvez consulter toutes les topologies disponibles sur **https://topology-zoo.org/explore.html**
 
 
 <p align="center">
