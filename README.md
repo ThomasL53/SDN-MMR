@@ -21,7 +21,9 @@
    ```shell
    ./install.sh
    ```
-    
+
+----------------
+
 ## Exemple d'utilisation
 Démarrage de la simulation avec l'affichage des logs de DEBUG:
   ```shell
@@ -40,7 +42,9 @@ Ouverture de l'interface de perturbations d'un lien:
 Test du streaming adaptatif DASH:
 
 [![Allez à la section](https://img.shields.io/badge/Section_lecture_de_vidéo-blue.svg)](https://github.com/ThomasL53/SDN-MMR/tree/master?tab=readme-ov-file#lecture-des-fichiers-vid%C3%A9os)
-    
+
+----------------
+
 ## Choix et format la topologie SDN
 ### Topologoie 'topology-zoo'
 Les topologies exploitables sur cette plateforme sont celles disponibles sur https://topology-zoo.org/.  
@@ -100,6 +104,8 @@ self.net.addController('c0',controller=RemoteController, ip='127.0.0.1', port=66
 - Pour connaitre la topologie et notament les interfaces utilisées, une vue ***'graph.svg'*** est générer à chaque démarrage de simulation. 
 - Cette vue est créer dans core/net.py à partir du modèle mininet et containeurnet démarer.
 - Networx avec l'algorithme **'kamada_kawai'** va générer la vue de la topologie complète avec en rouge les noeuds Dockers.
+
+----------------
 
 ## Steaming vidéo adaptatif Dash
 Le streaming vidéo adaptatif (DASH) est une technologie qui permet de diffuser des vidéos de manière flexible, en ajustant automatiquement la qualité en fonction de la vitesse de connexion de l'utilisateur.
