@@ -50,7 +50,9 @@ Les topologies exploitables sur cette plateforme sont celles disponibles sur **h
 Pour mettre en oeuvre une topologie, il suffit de spécifier son nom dans le programme core/start.py et core/stop.py.  
 Par défaut, la topologie renseignée est **'Aarnet'**. Par exemple, si vous voulez simuler la topologie **'Renater2010'** remplacer **'Aaranet'** dans core/start.py et core/stop.py par **'Renater2010'**
 Vous pouvez toutes les topologies disponibles sur **https://topology-zoo.org/explore.html**
-> img topology-zoo
+<p align="center">
+	<img src="img/TopologyZoo.png"  width=200%/>  
+</p>
 
 ### Serveur et client (***Docker***)
 Dans ces topologies, nous implémentons **deux serveurs flask** et **un client Firefox** grâce à Containernet. La déclaration de ces trois conteneurs docker se fait dans core/net.py
