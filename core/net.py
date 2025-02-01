@@ -58,8 +58,9 @@ class Net:
 
         #Ajout des dockers au réseau
         srv = self.dockernet.addDocker('srv',ip="192.168.1.1", ports=[80],port_bindings={80:8888}, volumes=[f"{os.getcwd()}/app:/app"], dcmd="python app.py",dimage="thomasl53/webserver") #image custom flask avec l'ajout de iproute2, iputils-ping et net-tools dmcd définit le point d'entrée
-        srv2 = self.dockernet.addDocker('srv2',ip="192.168.1.2", ports=[80],port_bindings={80:9999}, volumes=[f"{os.getcwd()}/client:/app"], dcmd="python app.py",dimage="thomasl53/webserver")#image custom flask avec l'ajout de iproute2, iputils-ping et net-tools dmcd définit le point d'entrée
-        client = self.dockernet.addDocker('client',ip="192.168.1.3", ports=[3000],port_bindings={3000:3001}, dcmd="/init",dimage="thomasl53/firefox") #image custom flask avec l'ajout de iproute2, iputils-ping et net-tools dmcd définit le point d'entrée pour le serveur
+
+        srv2 = self.dockernet.addDocker('srv2',ip="192.168.1.2", ports=[80],port_bindings={80:9999}, volumes=[f"{os.getcwd()}/app:/app"], dcmd="python app.py",dimage="thomasl53/webserver") #image custom flask avec l'ajout de iproute2, iputils-ping et net-tools dmcd définit le point d'entrée
+        client = self.dockernet.addDocker('client',ip="192.168.1.3", ports=[3000],port_bindings={3000:3000}, dcmd="/init",dimage="thomasl53/firefox") #image custom flask avec l'ajout de iproute2, iputils-ping et net-tools dmcd définit le point d'entrée pour le serveur
 
         #Récupération aléatoire de switch Mininet de la topologie
         randomS1 = self.net.get((random.choice(list(self.topology.switches_list.values())))) #récupération d'un switch aléatoire de la topologie
