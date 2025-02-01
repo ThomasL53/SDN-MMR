@@ -58,3 +58,51 @@ sudo docker pull thomasl53/webserver >> "$LOG_FILE" 2>&1
 echo "Réupération de l'image docker pour le client Firefox  ..."
 
 sudo docker pull thomasl53/firefox >> "$LOG_FILE" 2>&1
+
+cd ..
+
+echo "Installation de Grafana  ..."
+
+sudo apt-get install -y apt-transport-https software-properties-common wget >> "$LOG_FILE" 2>&1
+
+echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list >> "$LOG_FILE" 2>&1
+
+sudo apt-get update >> "$LOG_FILE" 2>&1
+
+sudo apt-get install grafana >> "$LOG_FILE" 2>&1
+
+cp data_source.yaml /etc/grafana/provisioning/datasources/default.yaml >> "$LOG_FILE" 2>&1
+
+cp dashboard.yaml /etc/grafana/provisioning/dashboards/default.yaml >> "$LOG_FILE" 2>&1
+
+sudo mkdir -p /var/lib/grafana/dashboards >> "$LOG_FILE" 2>&1
+
+wget -O /var/lib/grafana/dashboards/node-exporter-full.json https://grafana.com/api/dashboards/1860/revisions/latest/download >> "$LOG_FILE" 2>&1
+
+sudo systemctl restart grafana-server >> "$LOG_FILE" 2>&1
+
+echo "Installation de Node Exporter ..."
+
+wget https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-amd64.tar.gz >> "$LOG_FILE" 2>&1
+
+tar xvfz node_exporter-1.8.2.linux-amd64.tar.gz >> "$LOG_FILE" 2>&1
+
+cd node_exporter-1.8.2.linux-amd64 >> "$LOG_FILE" 2>&1
+
+sudo ./node_exporter & >> "$LOG_FILE" 2>&1
+
+cd ..
+
+echo "Installation de Prometheus ..."
+
+wget https://github.com/prometheus/prometheus/releases/download/v2.53.3/prometheus-2.53.3.linux-amd64.tar.gz >> "$LOG_FILE" 2>&1
+
+tar xvzf prometheus-2.53.3.linux-amd64.tar.gz >> "$LOG_FILE" 2>&1
+
+cp prometheus.yml prometheus-2.53.3.linux-amd64/prometheus.yml >> "$LOG_FILE" 2>&1
+
+rm prometheus.yml >> "$LOG_FILE" 2>&1
+
+cd prometheus-2.53.3.linux-amd64 >> "$LOG_FILE" 2>&1
+
+sudo ./prometheus --config.file=./prometheus.yml & >> "$LOG_FILE" 2>&1
