@@ -49,6 +49,8 @@ Test du streaming adaptatif DASH:
 Les topologies exploitables sur cette plateforme sont celles disponibles sur **https://topology-zoo.org/**.  
 Pour mettre en oeuvre une topologie, il suffit de spécifier son nom dans le programme core/start.py et core/stop.py.  
 Par défaut, la topologie renseignée est **'Aarnet'**. Par exemple, si vous voulez simuler la topologie **'Renater2010'** remplacer **'Aaranet'** dans core/start.py et core/stop.py par **'Renater2010'**
+Vous pouvez toutes les topologies disponibles sur **https://topology-zoo.org/explore.html**
+> img topology-zoo
 
 ### Serveur et client (***Docker***)
 Dans ces topologies, nous implémentons **deux serveurs flask** et **un client Firefox** grâce à Containernet. La déclaration de ces trois conteneurs docker se fait dans core/net.py
@@ -94,7 +96,12 @@ self.net.addController('c0',controller=RemoteController, ip='127.0.0.1', port=66
 - Grâce à l'algorithme de routage l2_learning les commutateurs OvS apprennent les adresses MAC des équipements pour acheminer efficacement le trafic.
 - Si un lien est coupé ou bloqué par une règle Openflow, le routage sera automatiquement adapté
 - Une fois la simulation démarrée, la page d'administration est accessible via: http://127.0.0.1:8080/ui/pages/index.html
-- Pour plus d'informations sur floodlight: https://github.com/floodlight/floodlight
+
+
+> img page d'admin floodlight
+
+
+ - Pour plus d'informations sur floodlight: https://github.com/floodlight/floodlight
 
 ***Nous utilisons pour ce contrôleur une image Docker personnalisée car les dépôts Ubuntu 24.04 n'intègrent plus toutes les bibliothèques pour Java 8.***
 
@@ -103,6 +110,8 @@ self.net.addController('c0',controller=RemoteController, ip='127.0.0.1', port=66
 - Pour connaître la topologie et notamment les interfaces utilisées, une vue ***'graph.svg'*** est générée à chaque démarrage de simulation. 
 - Cette vue est créée dans core/net.py à partir du modèle mininet et Containernet démarré.
 - NetworX avec l'algorithme **'kamada_kawai'** va générer la vue de la topologie complète avec en rouge les noeuds Dockers.
+
+  > img d'un image du graph.svg
  
 ----------------
 
@@ -153,7 +162,7 @@ def send_chunk(filename):
 - Pour analyser le trafic vidéo, vous pouvez utiliser la console du client Firefox (***clic droit->Inspecter ou F12***).
 - Désactiver 'Errors' et 'Warnings' puis activer 'XHR' et 'Requests':
 
->img
+>img du client firefox avec la console qui va bien
 
 ### Analyse du trafic réseau
 - Pour analyser le trafic réseau sur un lien de la simulation, utiliser Wireshark
