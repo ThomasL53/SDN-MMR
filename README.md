@@ -213,13 +213,51 @@ Cependant, peux de distribution fournise un noyau compilé avec ce module. Il es
 - Pour pouvoir observer le trafic vidéo avec MPTCP, démarrer la simulation et connecter à un des serveurs comme d'écrit dans la partie 'Lecture des fichiers vidéos'
 - Clic sur le bouton 'MPTCP OFF' pour activer le MPTCP.  En suivant la partie 'Analyse du trafic vidéo' vous serez en mesure de voir les réquetes faites par le serveur pour lire un fichier video DASH avec MPTCP
 
+<p align="center">
+	<img src="img/MPTCP_ON.png"  width=125%/>  
+	
+</p>
+
+- Pour obtenir plus de statisques sur la vidéo, vous pouvez aussi utiliser l'oglet 'Network' de la console de développeur Firefox. Vous pourrez alors observer la latence de chaque paquets:
+- Latence sans MPTCP:
+
+  <p align="center">
+	<img src="img/MS_without.png"  width=125%/>  
+	
+</p>
+
+- Latence avec MPTCP:
+
+  <p align="center">
+	<img src="img/MS_MPTCP.png"  width=125%/>  
+	
+</p>
+- Avec une perturbations sur les liens entre le client et le serveur, on observe encore un plus grand écrat en l'avantage de MPTCP entre les deux solutions.
 
 
-  
+### Observation du MPTCP avec dashJS
+- Pour observer d'autre données permettant d'évaluer l'utilité de MPTCP pour le streaming adaptatif DASH, nous pouvont aussi directment utiliser les données fournises par le lecteur
+- Par exemple la méthode `.getElementById("bufferLevel")` donnera l'état du tampon.
+- Un exemple de page HTML qui peux être utiliser pour afficher des statistiques est disponible dans app/templates/indexStat.html
+- Pour plus de détail sur les statistiques disponibles, consulter: https://dashjs.org/
 
-
+### Evaluation de la QoE
+- Evaluer la QoE sur cette plateforme n'est pas vraiment possible. L'utilisation d'une machine virtuelle pour démarrer une autre simulation à l'intérieur avec des conteneurs Docker rend l'expérience utilisateur fortement réduite en raison de l'environement utiliser.
+- Pour évaluer la QoE, nous pensons que l'utilisation d'une plateforme physique serait beaucoup plus adapater
 
 ### Référence considérer pour MPTCP over DASH
 https://dl.acm.org/doi/10.1145/2999572.2999606
+
 https://ieeexplore.ieee.org/document/10468727
+
 https://ieeexplore.ieee.org/document/7774599
+
+## FAQ
+- Quels indicateurs utiliser pour détecter une perte de bande passante ?
+	- Taux de perte de paquets, jitter, latence, etc.
+ - 
+- Quel algorithme de routage dynamique utiliser ?
+- 
+- Comment assurer une transition fluide lors du changement de routage ?
+.
+
