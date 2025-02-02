@@ -120,7 +120,11 @@ self.net.addController('c0',controller=RemoteController, ip='127.0.0.1', port=66
 - Cette vue est créée dans core/net.py à partir du modèle mininet et Containernet démarré.
 - NetworX avec l'algorithme **'kamada_kawai'** va générer la vue de la topologie complète avec en rouge les noeuds Dockers.
 
-  > img d'un image du graph.svg
+<p align="center">
+	<img src="img/Graph.png"  width=50%/>  
+	
+</p>
+
  
 ----------------
 
