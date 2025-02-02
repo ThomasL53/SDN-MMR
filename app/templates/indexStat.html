@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecteur vidéo adaptatif</title>
+<style>
+ video {
+   width: 100%;
+   max-width: 800px;
+ }
+
+ .video-stats {
+   margin-top: 10px;
+   font-size: 16px;
+ }
+</style>
+</head>
+<body>
+<video data-dashjs-player autoplay controls>
+ <source src="http://192.168.1.1/video/video.mpd" type="application/dash+xml">
+</video>
+<div class="video-stats">
+  <p><strong>Statistiques de la vidéo:</strong></p>
+  <p id="bufferLevel">Niveau de tampon:</p>
+  <p id="playbackRate">Vitesse de lecture:</p>
+  <p id="currentQuality">Qualité actuelle:</p>
+</div>
+<button id="toggleVideoButton">MPTCP OFF</button>
+<script src="/videojs/dash.all.min.js"></script>
+<script>
+ const video = document.querySelector("video");
+ const player = dashjs.MediaPlayer().create();
+ let isMPTCPOn = false;
+
+ const toggleVideo = () => {
+   if (isMPTCPOn) {
+     player.initialize(video, "http://192.168.1.1/video/video.mpd", true);
+     document.getElementById("toggleVideoButton").innerText = "MPTCP OFF";
+   } else {
+     player.initialize(video, "http://192.168.1.1/video/videoMPTCP.mpd", true);
+     document.getElementById("toggleVideoButton").innerText = "MPTCP ON";
+   }
+   isMPTCPOn = !isMPTCPOn;
+ };
+
+ const updateStats = () => {
+   document.getElementById("bufferLevel").innerText = `Niveau de tampon: ${player.getBufferLength()}`;
+   document.getElementById("playbackRate").innerText = `Vitesse de lecture: ${player.getPlaybackRate()}`;
+   document.getElementById("currentQuality").innerText = `Qualité actuelle: ${player.getQualityFor("video")}`;
+ };
+
+ document.getElementById("toggleVideoButton").addEventListener("click", toggleVideo);
+ video.addEventListener('timeupdate', updateStats);
+</script>
+</body>
+</html>
