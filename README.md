@@ -175,7 +175,10 @@ def send_chunk(filename):
 - Pour analyser le trafic vidéo, vous pouvez utiliser la console du client Firefox (***clic droit->Inspecter ou F12***).
 - Désactiver 'Errors' et 'Warnings' puis activer 'XHR' et 'Requests':
 
->img du client firefox avec la console qui va bien
+<p align="center">
+	<img src="img/MPTCP_OFF.png"  width=125%/>  
+	
+</p>
 
 ### Analyse du trafic réseau
 - Pour analyser le trafic réseau sur un lien de la simulation, utiliser Wireshark
