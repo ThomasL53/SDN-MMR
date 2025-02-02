@@ -104,7 +104,10 @@ self.net.addController('c0',controller=RemoteController, ip='127.0.0.1', port=66
 - Une fois la simulation démarrée, la page d'administration est accessible via: http://127.0.0.1:8080/ui/pages/index.html
 
 
-> img page d'admin floodlight
+<p align="center">
+	<img src="img/Floodlight.png"  width=80%/>  
+	
+</p>
 
 
  - Pour plus d'informations sur floodlight: https://github.com/floodlight/floodlight
