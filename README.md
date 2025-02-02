@@ -184,3 +184,42 @@ def send_chunk(filename):
 - Pour analyser le trafic réseau sur un lien de la simulation, utiliser Wireshark
 - Sélectionner grâce à la vue ***'graph.svg'*** l'interface à surveiller
 
+----------------
+
+## Optimisation du Streaming DASH avec Multi-Path TCP (MPTCP)
+Le Multi-Path TCP (MPTCP) permet d’utiliser simultanément plusieurs chemins réseau, augmentant ainsi la bande passante et la robustesse. Cette partie vise à étudier MPTCP pour optimiser le streaming DASH.
+
+### Mise en place de l'environement
+Pour mettre en oeuvre MPTCP, la méthode plus répendu est de charger dans le noyau le module MPTCP:
+```bash
+sudo modprobe mptcp
+```
+Cependant, peux de distribution fournise un noyau compilé avec ce module. Il est donc nécessaires de recompiler par vos propres moyen votre noyau.
+
+- En raison de ces nombreuses contraintes, nous avons décider de simuler du MPTCP en chargant des chunks vidéo Dash simultanement sur deux serveurs.
+- L'objectif ici est de simuler le MPTCP en chargant les chunks pairs sur le serveur 1 et les chunks impairs sur le serveur 2.
+- Pour ce faire, nous avons reutiliser les chunks et le fichier MPD de notre platforme 'SDN-MMR' puis nous avons remplacer la définition des chunks `<SegmentTemplate>` par une définition `<SegmentList>` avec l'utilisation des balises `<SegmentURL>` pour spécifier le chemin de chaque chunk.
+- La construction de ce fichier n'est pas possible avec FFMPEG ou MP4Box. Il faut donc le construire à la main. Pour ce faire, le programme utils/GenerateMPD permet de generate toutes les lignes 
+`<SegmentURL>` pour construire tous les chemins automatiquement.
+- Le fichier MPD utilisant cette technique d'alternance de chargement des chunks est disponible dans app/video/videoMPTCP.mpd
+
+### Etude de l'impact du MPTCP
+- Pour pouvoir analyser correctement l'impact de notre solution MPTCP, il nous fallait un élement de comparaison
+- Nous avons donc décider de reutilliser notre plateforme permettant d'étudier le streaming adaptatif avec du SDN
+- Nous avons intégrer à cette plateforme notre fichier MPD pour MPTCP est ajouter à la page web des serveurs un bouton 'MPTCP' permetant de passer rapidement d'une solution classique à une solution MPTCP
+- L'utilisation d'une même plateforme nous permet de comparait DASH et DASH over MPTCP dans la même instance de la simulation. Ce qui rend les mesures plus exploitables entre les deux solutions.
+
+### Observation du MPTCP
+- Pour pouvoir observer le trafic vidéo avec MPTCP, démarrer la simulation et connecter à un des serveurs comme d'écrit dans la partie 'Lecture des fichiers vidéos'
+- Clic sur le bouton 'MPTCP OFF' pour activer le MPTCP.  En suivant la partie 'Analyse du trafic vidéo' vous serez en mesure de voir les réquetes faites par le serveur pour lire un fichier video DASH avec MPTCP
+
+
+
+  
+
+
+
+### Référence considérer pour MPTCP over DASH
+https://dl.acm.org/doi/10.1145/2999572.2999606
+https://ieeexplore.ieee.org/document/10468727
+https://ieeexplore.ieee.org/document/7774599
