@@ -22,7 +22,7 @@ if [ "$1" == "start" ]; then
    echo "Controlleur floodlight accèsible via http://127.0.0.1:8080/ui/pages/index.html"
    echo "Serveur vidéo accèsible via http://127.0.0.1:8888 (192.168.1.1 dans la simulation)"
    echo "Client vidéo accèsible via http://127.0.0.1:9999 (192.168.1.2 dans la simulation)"
-   echo "Client firefox accèsible via http://127.0.0.1:3000"
+   echo "Client firefox accèsible via http://127.0.0.1:3001"
  fi
 
 elif [ "$1" == "stop" ]; then
