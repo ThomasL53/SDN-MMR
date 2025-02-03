@@ -120,7 +120,7 @@ sudo chown -R prometheus:prometheus /etc/prometheus/console_libraries >> "$LOG_F
 
 rm prometheus.tar.gz >> "$LOG_FILE" 2>&1
 
-sudo cp prometheus.yml /etc/prometheus/prometheus.yml >> "$LOG_FILE" 2>&1
+sudo cp config_files/prometheus.yml /etc/prometheus/prometheus.yml >> "$LOG_FILE" 2>&1
 
 sudo chown prometheus:prometheus /etc/prometheus/prometheus.yml >> "$LOG_FILE" 2>&1
 
@@ -160,9 +160,9 @@ sudo apt-get update >> "$LOG_FILE" 2>&1
 
 sudo apt-get install grafana -y >> "$LOG_FILE" 2>&1
 
-sudo cp data_source.yml /etc/grafana/provisioning/datasources/default.yml >> "$LOG_FILE" 2>&1
+sudo cp config_files/data_source.yml /etc/grafana/provisioning/datasources/default.yml >> "$LOG_FILE" 2>&1
 
-sudo cp dashboard.yml /etc/grafana/provisioning/dashboards/default.yml >> "$LOG_FILE" 2>&1
+sudo cp config_files/dashboard.yml /etc/grafana/provisioning/dashboards/default.yml >> "$LOG_FILE" 2>&1
 
 sudo wget -O /etc/grafana/provisioning/dashboards/dashboard.json https://grafana.com/api/dashboards/1860/revisions/latest/download >> "$LOG_FILE" 2>&1
 
