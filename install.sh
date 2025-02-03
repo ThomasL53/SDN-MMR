@@ -89,7 +89,7 @@ tar xvfz node_exporter-1.8.2.linux-amd64.tar.gz >> "$LOG_FILE" 2>&1
 
 cd node_exporter-1.8.2.linux-amd64 >> "$LOG_FILE" 2>&1
 
-sudo ./node_exporter & >> "$LOG_FILE" 2>&1
+sudo ./node_exporter & > /dev/null 2>&1 &
 
 cd ..
 
@@ -104,7 +104,9 @@ cp prometheus.yml prometheus-2.53.3.linux-amd64/prometheus.yml >> "$LOG_FILE" 2>
 rm prometheus.yml >> "$LOG_FILE" 2>&1
 cd prometheus-2.53.3.linux-amd64 > /dev/null 2>&1
 
-sudo ./prometheus --config.file=./prometheus.yml > /dev/null 2>&1
+sudo ./prometheus --config.file=prometheus.yml > /dev/null 2>&1 &
 
 echo "Installation complétée avec succès !"
+
+cd ..
 
