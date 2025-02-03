@@ -130,13 +130,10 @@ self.net.addController('c0',controller=RemoteController, ip='127.0.0.1', port=66
 - Les métriques de la topologie sont exportés via l'outil Node Explorer, il affiche sur une page web toutes les informations du système hôte sous forme de texte.
 - Ces informations sont mises en forme par Prometheus afin d'être exploitable par Grafana.
 - Les informations sont visibles de manière graphique via l'outil Grafana accessible à l'adresse http://127.0.0.1:3000, lors de la première utilisation, un mot de passe doit être configuré.
-- Pour pouvoir être adapté à de nombreuses topologies, notre plateforme connecte les machines de façon aléatoire. 
-- Pour connaître la topologie et notamment les interfaces utilisées, une vue ***'graph.svg'*** est générée à chaque démarrage de simulation. 
-- Cette vue est créée dans core/net.py à partir du modèle mininet et Containernet démarré.
-- NetworX avec l'algorithme **'kamada_kawai'** va générer la vue de la topologie complète avec en rouge les noeuds Dockers.
+- Un dashboard "Node Exporter Full" est déjà configuré, le trafic des différentes interfaces est visible via le panneau 'Network Traffic Base'.
 
 <p align="center">
-	<img src="img/grafana_net-intf.png"  width=50%/>  
+	<img src="img/grafana_net-intf.png"  width=90%/>  
 	
 </p>
  
