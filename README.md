@@ -68,7 +68,7 @@ client = self.dockernet.addDocker('client',ip="192.168.1.3", ports=[3000],port_b
 ```
 - Le premier serveur **'srv'** est configuré avec l'adresse **192.168.1.1** dans la simulation et est accessible sur la machine hôte via une redirection sur le **port 8888**
 - Le deuxième serveur **'srv2'** est configuré avec l'adresse **192.168.1.2** dans la simulation et est accessible sur la machine hôte via une redirection sur le **port 9999**
-- Le client Firefox **'Client'** est configuré avec l'adresse **192.168.1.2** dans la simulation et est accessible sur la machine hôte via une redirection sur le **port 3000**
+- Le client Firefox **'Client'** est configuré avec l'adresse **192.168.1.2** dans la simulation et est accessible sur la machine hôte via une redirection sur le **port 3001**
 - Les deux serveurs ont accès au répertoire 'app' du projet grâce à un montage de volume '/app' sur les conteneurs docker.
 - 'dmcd' correspond au point d'entrée pour les containeurs. 
 - Les images utilisées sont des reconstructions d'images Docker Flask et Firefox avec l'ajout des paquets **iproute2, iputils et net-tools** pour pouvoir être configurés par Containeurnet.
