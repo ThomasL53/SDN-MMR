@@ -31,12 +31,12 @@ Démarrage de la simulation avec l'affichage des logs de DEBUG:
     
 Arrêt de la simulation:
   ```shell
-  ./SDN stop
+  ./SDN.sh stop
   ```
     
 Ouverture de l'interface de perturbations d'un lien:
   ```shell
-  ./SDN degrade
+  ./SDN.sh degrade
   ```
 Test du streaming adaptatif DASH:
 
