@@ -232,7 +232,7 @@ Cependant, peux de distribution fournise un noyau compilé avec ce module. Il es
 	<img src="img/MS_MPTCP.png"  width=125%/>  
 	
 </p>
-- Avec une perturbations sur les liens entre le client et le serveur, on observe encore un plus grand écrat en l'avantage de MPTCP entre les deux solutions.
+- Avec une perturbations sur les liens entre le client et le serveur, on observe encore un plus grand écart en l'avantage de MPTCP entre les deux solutions.
 
 
 ### Observation du MPTCP avec dashJS
