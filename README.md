@@ -9,8 +9,7 @@
 
 ## Installation
   Cette plateforme a été developpée et testée sur Ubuntu 24.04. Merci d'utiliser uniquement cette version d'Ubuntu.  
-  **Pré-requis : installer le moteur Docker :**  
-  https://docs.docker.com/engine/install/ubuntu/
+  **Pré-requis : installer le moteur Docker :**  https://docs.docker.com/engine/install/ubuntu/
 
   1. Pour installer la plateforme, commencer par télécharger le répertoire du projet via git ou directement en récupérant le .zip depuis Github.
      
