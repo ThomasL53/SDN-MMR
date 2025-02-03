@@ -102,7 +102,9 @@ tar xvzf prometheus-2.53.3.linux-amd64.tar.gz >> "$LOG_FILE" 2>&1
 cp prometheus.yml prometheus-2.53.3.linux-amd64/prometheus.yml >> "$LOG_FILE" 2>&1
 
 rm prometheus.yml >> "$LOG_FILE" 2>&1
+cd prometheus-2.53.3.linux-amd64 > /dev/null 2>&1
 
-cd prometheus-2.53.3.linux-amd64 >> "$LOG_FILE" 2>&1
+sudo ./prometheus --config.file=./prometheus.yml > /dev/null 2>&1
 
-sudo ./prometheus --config.file=./prometheus.yml & >> "$LOG_FILE" 2>&1
+echo "Installation complétée avec succès !"
+
