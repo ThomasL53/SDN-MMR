@@ -61,11 +61,96 @@ sudo docker pull thomasl53/firefox >> "$LOG_FILE" 2>&1
 
 cd ..
 
-echo "Installation de Grafana  ..."
+echo "Installation de Node Exporter ..."
+wget -O node_exporter.tar.gz https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-amd64.tar.gz >> "$LOG_FILE" 2>&1
+
+sudo tar xfz node_exporter.tar.gz -C /usr/local/bin --strip-components=1 >> "$LOG_FILE" 2>&1
+
+sudo useradd --no-create-home --shell /bin/false node_exporter >> "$LOG_FILE" 2>&1
+
+sudo chown node_exporter:node_exporter /usr/local/bin/node_exporter >> "$LOG_FILE" 2>&1
+
+rm node_exporter.tar.gz >> "$LOG_FILE" 2>&1
+
+sudo tee /etc/systemd/system/node_exporter.service > /dev/null <<EOF
+[Unit]
+Description=Node Exporter
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/node_exporter
+Restart=always
+User=nobody
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl daemon-reload >> "$LOG_FILE" 2>&1
+
+sudo systemctl enable --now node_exporter > /dev/null 2>&1
+
+echo "Installation de Prometheus ..."
+
+sudo useradd --no-create-home --shell /usr/sbin/nologin prometheus >> "$LOG_FILE" 2>&1
+
+sudo mkdir /etc/prometheus >> "$LOG_FILE" 2>&1
+
+sudo mkdir /var/lib/prometheus >> "$LOG_FILE" 2>&1
+
+sudo chown prometheus:prometheus /etc/prometheus >> "$LOG_FILE" 2>&1
+
+sudo chown prometheus:prometheus /var/lib/prometheus >> "$LOG_FILE" 2>&1
+
+wget -O prometheus.tar.gz https://github.com/prometheus/prometheus/releases/download/v2.53.3/prometheus-2.53.3.linux-amd64.tar.gz >> "$LOG_FILE" 2>&1
+
+sudo tar xzf prometheus.tar.gz -C /usr/local/bin --strip-components=1 >> "$LOG_FILE" 2>&1
+
+sudo chown prometheus:prometheus /usr/local/bin/prometheus >> "$LOG_FILE" 2>&1
+
+sudo chown prometheus:prometheus /usr/local/bin/promtool >> "$LOG_FILE" 2>&1
+
+sudo cp -r /usr/local/bin/consoles /etc/prometheus >> "$LOG_FILE" 2>&1
+
+sudo cp -r /usr/local/bin/console_libraries /etc/prometheus >> "$LOG_FILE" 2>&1
+
+sudo chown -R prometheus:prometheus /etc/prometheus/consoles >> "$LOG_FILE" 2>&1
+
+sudo chown -R prometheus:prometheus /etc/prometheus/console_libraries >> "$LOG_FILE" 2>&1
+
+rm prometheus.tar.gz >> "$LOG_FILE" 2>&1
+
+sudo cp prometheus.yml /etc/prometheus/prometheus.yml >> "$LOG_FILE" 2>&1
+
+sudo chown prometheus:prometheus /etc/prometheus/prometheus.yml >> "$LOG_FILE" 2>&1
+
+sudo tee /etc/systemd/system/prometheus.service > /dev/null <<EOF
+[Unit]
+Description=Prometheus
+Wants=network-online.target
+After=network.target
+
+[Service]
+User=prometheus
+Group=prometheus
+Type=simple
+ExecStart=/usr/local/bin/prometheus \
+--config.file /etc/prometheus/prometheus.yml \
+--storage.tsdb.path /var/lib/prometheus/ \
+--web.console.templates=/etc/prometheus/consoles \
+--web.console.libraries=/etc/prometheus/console_libraries
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl daemon-reload >> "$LOG_FILE" 2>&1
+sudo systemctl enable --now prometheus > /dev/null 2>&1
+
+echo "Installation de Grafana ..."
 
 sudo apt-get install -y apt-transport-https software-properties-common wget >> "$LOG_FILE" 2>&1
-
-sudo mkdir -p /etc/apt/keyrings/ >> "$LOG_FILE" 2>&1
 
 wget -q -O - https://apt.grafana.com/gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/grafana.gpg >> "$LOG_FILE" 2>&1
 
@@ -73,44 +158,14 @@ echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stab
 
 sudo apt-get update >> "$LOG_FILE" 2>&1
 
-sudo apt-get install grafana >> "$LOG_FILE" 2>&1
+sudo apt-get install grafana -y >> "$LOG_FILE" 2>&1
 
-cp data_source.yaml /etc/grafana/provisioning/datasources/default.yaml >> "$LOG_FILE" 2>&1
+sudo cp data_source.yml /etc/grafana/provisioning/datasources/default.yml >> "$LOG_FILE" 2>&1
 
-cp dashboard.yaml /etc/grafana/provisioning/dashboards/default.yaml >> "$LOG_FILE" 2>&1
+sudo cp dashboard.yml /etc/grafana/provisioning/dashboards/default.yml >> "$LOG_FILE" 2>&1
 
-sudo mkdir -p /var/lib/grafana/dashboards >> "$LOG_FILE" 2>&1
+sudo wget -O /etc/grafana/provisioning/dashboards/dashboard.json https://grafana.com/api/dashboards/1860/revisions/latest/download >> "$LOG_FILE" 2>&1
 
-wget -O /var/lib/grafana/dashboards/node-exporter-full.json https://grafana.com/api/dashboards/1860/revisions/latest/download >> "$LOG_FILE" 2>&1
-
-sudo systemctl restart grafana-server >> "$LOG_FILE" 2>&1
-
-echo "Installation de Node Exporter ..."
-
-wget https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-amd64.tar.gz >> "$LOG_FILE" 2>&1
-
-tar xvfz node_exporter-1.8.2.linux-amd64.tar.gz >> "$LOG_FILE" 2>&1
-
-cd node_exporter-1.8.2.linux-amd64 >> "$LOG_FILE" 2>&1
-
-sudo ./node_exporter & > /dev/null 2>&1 &
-
-cd ..
-
-echo "Installation de Prometheus ..."
-
-wget https://github.com/prometheus/prometheus/releases/download/v2.53.3/prometheus-2.53.3.linux-amd64.tar.gz >> "$LOG_FILE" 2>&1
-
-tar xvzf prometheus-2.53.3.linux-amd64.tar.gz >> "$LOG_FILE" 2>&1
-
-cp prometheus.yml prometheus-2.53.3.linux-amd64/prometheus.yml >> "$LOG_FILE" 2>&1
-
-rm prometheus.yml >> "$LOG_FILE" 2>&1
-cd prometheus-2.53.3.linux-amd64 > /dev/null 2>&1
-
-sudo ./prometheus --config.file=prometheus.yml > /dev/null 2>&1 &
+sudo systemctl enable --now grafana-server >> "$LOG_FILE" 2>&1
 
 echo "Installation complétée avec succès !"
-
-cd ..
-
