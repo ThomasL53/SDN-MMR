@@ -63,7 +63,7 @@ Dans ces topologies, nous implémentons **deux serveurs flask** et **un client F
 ```python
 srv = self.dockernet.addDocker('srv',ip="192.168.1.1", ports=[80],port_bindings={80:8888}, volumes=[f"{os.getcwd()}/app:/app"], dcmd="python app.py",dimage="thomasl53/webserver") 
 srv2 = self.dockernet.addDocker('srv2',ip="192.168.1.2", ports=[80],port_bindings={80:9999}, volumes=[f"{os.getcwd()}/app:/app"], dcmd="python app.py",dimage="thomasl53/webserver") 
-client = self.dockernet.addDocker('client',ip="192.168.1.3", ports=[3000],port_bindings={3000:3000}, dcmd="/init",dimage="thomasl53/firefox") 
+client = self.dockernet.addDocker('client',ip="192.168.1.3", ports=[3000],port_bindings={3000:3001}, dcmd="/init",dimage="thomasl53/firefox") 
 ```
 - Le premier serveur **'srv'** est configuré avec l'adresse **192.168.1.1** dans la simulation et est accessible sur la machine hôte via une redirection sur le **port 8888**
 - Le deuxième serveur **'srv2'** est configuré avec l'adresse **192.168.1.2** dans la simulation et est accessible sur la machine hôte via une redirection sur le **port 9999**
@@ -168,7 +168,7 @@ def send_chunk(filename):
 ```
 ### Lecture des fichiers vidéos
 - Les fichiers vidéos peuvent être lus au travers de la simulation en utilisant le client Firefox (***dans la même plage d'adressage que le serveur***)
-- Pour se connecter au client Firefox, ouvrez un navigateur et accédez à **http://127.0.0.1:3000**
+- Pour se connecter au client Firefox, ouvrez un navigateur et accédez à **http://127.0.0.1:3001**
 - Dans la fenêtre qui s'ouvre accédez à **http://192.168.1.1**
 - La page web utilise un lecteur vidéo dashjs (***code JavaScript du lecteur est chargé en local depuis app/videojs/***)
 ### Analyse du trafic vidéo
