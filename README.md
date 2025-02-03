@@ -194,7 +194,7 @@ Pour mettre en oeuvre MPTCP, la méthode plus répendu est de charger dans le no
 ```bash
 sudo modprobe mptcp
 ```
-Cependant, peux de distribution fournise un noyau compilé avec ce module. Il est donc nécessaires de recompiler par vos propres moyen votre noyau.
+Cependant, peu de distribution fournise un noyau compilé avec ce module. Il est donc nécessaires de recompiler par vos propres moyen votre noyau.
 
 - En raison de ces nombreuses contraintes, nous avons décider de simuler du MPTCP en chargant des chunks vidéo Dash simultanement sur deux serveurs.
 - L'objectif ici est de simuler le MPTCP en chargant les chunks pairs sur le serveur 1 et les chunks impairs sur le serveur 2.
