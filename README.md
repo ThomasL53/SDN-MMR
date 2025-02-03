@@ -26,7 +26,7 @@ Si vous rencontrez un problème d'installation, referez-vous au fichier de log d
 ## Exemple d'utilisation
 Démarrage de la simulation avec l'affichage des logs de DEBUG:
   ```shell
-  ./SDN start DEBUG
+  ./SDN.sh start DEBUG
   ```
     
 Arrêt de la simulation:
